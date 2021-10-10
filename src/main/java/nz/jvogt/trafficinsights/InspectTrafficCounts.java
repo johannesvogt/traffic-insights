@@ -35,7 +35,7 @@ public class InspectTrafficCounts implements Runnable {
         logger.info("Inspecting file '{}', using {} minutes interval ...", inputFile.toString(), intervalMinutes);
 
         try {
-            Insights insights = new Insights(parseTrafficCounts(inputFile), Duration.ofMinutes(intervalMinutes));
+            TrafficInsights insights = new TrafficInsights(parseTrafficCounts(inputFile), Duration.ofMinutes(intervalMinutes));
 
             System.out.println("\n---- Total count:");
             System.out.println(insights.totalCount() + "\n");

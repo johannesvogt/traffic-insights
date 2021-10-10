@@ -28,17 +28,17 @@ import static java.util.stream.Collectors.toList;
  * In order to process larger amounts of data, the records should be instead persisted in a queryable data-store (SQL or NoSQL), with indexes supporting the 
  * queries required.
  */
-class Insights {
+class TrafficInsights {
 
     private final List<TrafficCount> trafficCountList;
 
     private final Duration duration;
 
-    public Insights(List<TrafficCount> trafficCountList) {
+    public TrafficInsights(List<TrafficCount> trafficCountList) {
         this(trafficCountList, Duration.ofMinutes(30));
     }
 
-    public Insights(List<TrafficCount> trafficCountList, Duration duration) {
+    public TrafficInsights(List<TrafficCount> trafficCountList, Duration duration) {
         this.duration = duration;
 
         // copy list and sort by date
@@ -84,7 +84,7 @@ class Insights {
         return sliding(trafficCountList, n)
                 // filter out windows that are not adhering to the defined duration (e.g. 30 minutes)
                 .filter(l -> Duration.between(l.get(0).getDateTime(), l.get(l.size() - 1).getDateTime()).equals(this.duration.multipliedBy(n - 1)))
-                .min(comparing(Insights::sumAll))
+                .min(comparing(TrafficInsights::sumAll))
                 .orElse(emptyList());
     }
 
