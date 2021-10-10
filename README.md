@@ -3,7 +3,18 @@
 ## Overview
 Simple CLI tool to inspect files containing traffic data.
 
+Expected file-format:
+```
+2016-12-01T05:00:00 5
+2016-12-01T05:30:00 12
+2016-12-01T06:00:00 14
+```
+
 ## Usage
+Pre-conditions:
+* Java 8 (or higher)
+* Maven
+
 Main-class: 
 ```
 nz.jvogt.trafficinsights.InspectTrafficCounts
@@ -30,8 +41,3 @@ Run unit-tests:
 mvn test
 ```
 
-## Notes
-
-* Currently processing of the data is done in-memory, by processing an list of records ordered by record-timestamp. A few optimizations can be considered:
-    * Indexing the data-structures in-memory, e.g. additional data-structures ordered by record-value, or store daily aggregations in a Map.
-    * In case of very large datasets, the data-structure should be persisted in a queryable store, with indexes on the relevant columns and potentially tables for aggregated data.
