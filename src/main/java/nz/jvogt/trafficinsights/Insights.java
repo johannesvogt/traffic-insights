@@ -19,7 +19,14 @@ import static java.util.stream.Collectors.toList;
 /**
  * Class implementing insights operations on list of traffic-count records (datetime,count - pairs).
  *
- * Some operations require the standard interval between records, as record-sequence may be incomplete. Default interval is 30 minutes.
+ * Some operations require the standard interval between records, as the record-sequence may be incomplete. Default interval is 30 minutes.
+ *
+ * Notes:
+ * The insights-calculations are done ad-hoc, based on a ordered list of records. In case this class is used in a different context (e.g. as part of an API), 
+ * additional data-structures (ordered by count, aggregated by day) can be created on instantiation, to improve performance.
+ *
+ * In order to process larger amounts of data, the records should be instead persisted in a queryable data-store (SQL or NoSQL), with indexes supporting the 
+ * queries required.
  */
 class Insights {
 
